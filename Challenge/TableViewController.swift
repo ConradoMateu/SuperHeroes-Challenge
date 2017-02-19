@@ -9,40 +9,48 @@
 import UIKit
 
 class TableViewController: UITableViewController {
-
+    
+    // MARK: - Vars
     @IBOutlet var tb: UITableView!
-    var SuperHeroes: [SuperHero] = [SuperHero]()
+    
     var superHeroDetail: SuperHero?
+    var restApiManager:RestApiManager? = nil
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        initData()
+        self.restApiManager =  RestApiManager(tableView: tb)
+        self.restApiManager?.initialize()
     }
    
+    
+    // MARK: - Table view data source
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SuperHeroes.count
+        return restApiManager!.getSuperHeroes().count
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        superHeroDetail = SuperHeroes[indexPath.row]
+        superHeroDetail = restApiManager!.getSuperHeroes()[indexPath.row]
         performSegue(withIdentifier: "Detail", sender: nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) 
-        cell.detailTextLabel?.text = self.SuperHeroes[indexPath.row].alias ?? ""
+        cell.detailTextLabel?.text = restApiManager!.getSuperHeroes()[indexPath.row].alias ?? ""
         
-        cell.textLabel?.text = self.SuperHeroes[indexPath.row].name
-        downloadImage(self.SuperHeroes[indexPath.row].urlImage as URL, tableview: cell)
+        cell.textLabel?.text = restApiManager!.getSuperHeroes()[indexPath.row].name
+        
+        downloadImage(restApiManager!.getSuperHeroes()[indexPath.row].urlImage as URL, tableview: cell)
         
         return cell
     }
     
     
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? DetailViewController {
@@ -53,50 +61,6 @@ class TableViewController: UITableViewController {
     }
     
     
-    func initData() {
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        let apiKey = valueForAPIKey(named: "API_KEY")
-        let request = NSURLRequest(url: NSURL(string: "http://comicvine.gamespot.com/api/characters?api_key=" + apiKey + "&format=json")! as URL)
-        
-        let task: URLSessionDataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
-            if let data = data {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
-                    if let all = json["results"] as? [[String:Any]] {
-                        
-                        all.forEach{
-                            if let sh = SuperHero(json: $0){
-                                self.SuperHeroes.append(sh)
-                            }
-                            
-                        }
-                        DispatchQueue.main.async{
-                            self.tb.reloadData()
-                        }
-                        
-                    }
-                    
-                } catch let error as NSError {
-                    print("Failed to load: \(error.localizedDescription)")
-                }
-            }
-        }
-        
-        task.resume()
-        
-        
-        
-    }
-    
-    
-    
-    func valueForAPIKey(named keyname:String) -> String {
-        let filePath = Bundle.main.path(forResource: "ApiKey", ofType: "plist")
-        let plist = NSDictionary(contentsOfFile:filePath!)
-        let value = plist?.object(forKey: keyname) as! String
-        print(value)
-        return value
-    }
     
     func getDataFromUrl(_ url:URL, completion: @escaping ((_ data: Data?, _ response: URLResponse?, _ error: NSError? ) -> Void)) {
         URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
@@ -114,4 +78,4 @@ class TableViewController: UITableViewController {
        
     }
 
-    }
+}
