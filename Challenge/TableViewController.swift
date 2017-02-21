@@ -39,7 +39,13 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
         cell.detailTextLabel?.text = restApiManager!.getSuperHeroes()[indexPath.row].alias ?? ""
         cell.textLabel?.text = restApiManager!.getSuperHeroes()[indexPath.row].name
-        downloadImage(restApiManager!.getSuperHeroes()[indexPath.row].urlImage as URL, tableview: cell)
+        if let img =  self.restApiManager?.superHeroes[indexPath.row].image{
+            cell.imageView?.image = img
+        }else{
+            cell.imageView?.imageFromServerURL(urlString: restApiManager!.superHeroes[indexPath.row].urlImage){ image in self.restApiManager?.superHeroes[indexPath.row].image = image
+        }
+
+        }
         return cell
     }
 
@@ -67,8 +73,28 @@ class TableViewController: UITableViewController {
                 guard let data = data, error == nil else { return }
                 tableview.imageView?.image =  UIImage(data: data)
                 self.tableView.reloadData()
+                
             }
         }
     }
 
 }
+
+
+extension UIImageView {
+    public func imageFromServerURL(urlString: String, completion: @escaping (_ image: UIImage) -> Void) {
+
+        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
+
+            if error != nil {
+                print(error)
+                return
+            }
+            DispatchQueue.main.async(execute: { () -> Void in
+                let image = UIImage(data: data!)
+                self.image = image
+                completion(image!)
+            })
+
+        }).resume()
+    }}

@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 
 struct SuperHero {
-    let urlImage: NSURL
+    let urlImage: String
     let name: String?
     let alias: String?
     let birthday: String?
     let description: String
     let realname: String?
+    var image: UIImage?
 }
 extension SuperHero {
     init?(json: [String: Any]) {
@@ -31,11 +32,12 @@ extension SuperHero {
         let birth = json["birth"] as? String
         let realname = json["real_name"] as? String
         self.name = name
-        self.urlImage = NSURL(string: urlImage)!
+        self.urlImage = urlImage
         self.alias = alias
         self.birthday = birth
         self.description = description.html2String
         self.realname = realname
+        self.image = nil
     }
 }
 extension String {
