@@ -7,5 +7,5 @@ before_install:
 
 script:
   - swiftlint
-  - set -o pipefail && xcodebuild -workspace Challenge.xcworkspace -scheme 'ChallengeTests' -destination 'platform=iOS Simulator,name=iPhone 6s Plus' build test CODE_SIGN_IDENTITY=- | xcpretty -c
+  - set -o pipefail && xcodebuild -workspace Challenge.xcworkspace -scheme 'Challenge' -destination 'platform=iOS Simulator,name=iPhone 6s Plus' build test CODE_SIGN_IDENTITY=- | xcpretty -c
 
