@@ -3,5 +3,4 @@ use_frameworks!
 
 target 'Challenge' do
     pod 'SwiftyJSON'
-    pod 'SwiftLint'
 end

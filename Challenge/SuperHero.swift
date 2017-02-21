@@ -19,13 +19,13 @@ struct SuperHero {
 }
 extension SuperHero {
     init?(json: [String: Any]) {
+
         guard let description = json["description"] as? String,
         let image = json["image"] as? [String:Any],
         let urlImage = image["icon_url"] as?  String,
         let name = json["name"] as? String
-        
         else {
-                return nil
+            return nil
         }
         let alias = json["aliases"] as? String
         let birth = json["birth"] as? String
@@ -37,17 +37,13 @@ extension SuperHero {
         self.description = description.html2String
         self.realname = realname
     }
-    
-    
-    
 }
-
-
 extension String {
     var html2AttributedString: NSAttributedString? {
         guard let data = data(using: .utf8) else { return nil }
         do {
-            return try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
+            let options = [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue] as [String : Any]
+            return try NSAttributedString(data: data, options: options, documentAttributes: nil)
         } catch let error as NSError {
             print(error.localizedDescription)
             return  nil
