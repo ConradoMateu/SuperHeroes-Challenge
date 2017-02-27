@@ -11,7 +11,6 @@
 		E216C7D61E567E6500936847 /* SuperHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216C7D51E567E6500936847 /* SuperHero.swift */; };
 		E216C7D81E5692D500936847 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216C7D71E5692D500936847 /* TableViewController.swift */; };
 		E216C7DA1E56A88300936847 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216C7D91E56A88300936847 /* DetailViewController.swift */; };
-		E265D4D31E5A353D004E8FA6 /* ApiKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = E265D4D21E5A353D004E8FA6 /* ApiKey.plist */; };
 		E265D4D71E5A4513004E8FA6 /* RestApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E265D4D61E5A4513004E8FA6 /* RestApiManager.swift */; };
 		E2EC80BD1E5355DD00B4FD05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EC80BC1E5355DD00B4FD05 /* AppDelegate.swift */; };
 		E2EC80C21E5355DD00B4FD05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2EC80C01E5355DD00B4FD05 /* Main.storyboard */; };
@@ -38,7 +37,6 @@
 		E216C7D51E567E6500936847 /* SuperHero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperHero.swift; sourceTree = "<group>"; };
 		E216C7D71E5692D500936847 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		E216C7D91E56A88300936847 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		E265D4D21E5A353D004E8FA6 /* ApiKey.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKey.plist; sourceTree = "<group>"; };
 		E265D4D61E5A4513004E8FA6 /* RestApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiManager.swift; sourceTree = "<group>"; };
 		E2EC80B91E5355DD00B4FD05 /* Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Challenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2EC80BC1E5355DD00B4FD05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 				E2EC80C81E5355DD00B4FD05 /* Info.plist */,
 				E216C7D71E5692D500936847 /* TableViewController.swift */,
 				E216C7D91E56A88300936847 /* DetailViewController.swift */,
-				E265D4D21E5A353D004E8FA6 /* ApiKey.plist */,
 				E265D4D61E5A4513004E8FA6 /* RestApiManager.swift */,
 			);
 			path = Challenge;
@@ -224,7 +221,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2EC80C71E5355DD00B4FD05 /* LaunchScreen.storyboard in Resources */,
-				E265D4D31E5A353D004E8FA6 /* ApiKey.plist in Resources */,
 				E2EC80C41E5355DD00B4FD05 /* Assets.xcassets in Resources */,
 				E2EC80C21E5355DD00B4FD05 /* Main.storyboard in Resources */,
 			);

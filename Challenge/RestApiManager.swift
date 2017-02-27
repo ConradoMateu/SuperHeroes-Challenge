@@ -8,7 +8,10 @@
 
 import Foundation
 import UIKit
+
+
 class RestApiManager: NSObject {
+    
 
     init(tableView: UITableView) {
         self.tableView = tableView
@@ -18,9 +21,9 @@ class RestApiManager: NSObject {
     let tableView: UITableView
     let baseURL = "http://comicvine.gamespot.com/api/characters"
     let format = "json"
+    let apiKey = "cd2bdd5c415fea94bdbd7b463b5fa6a6914f6531"
 
     private func getURL() -> URL {
-        let apiKey = valueForAPIKey(named: "API_KEY")
         let url = NSURL(string: baseURL + "?api_key=" + apiKey + "&format=" + format)! as URL
         return url
     }
@@ -65,10 +68,4 @@ class RestApiManager: NSObject {
         }
     }
 
-    func valueForAPIKey(named keyname: String) -> String {
-        let filePath = Bundle.main.path(forResource: "ApiKey", ofType: "plist")
-        let plist = NSDictionary(contentsOfFile:filePath!)
-        let value = plist?.object(forKey: keyname) as! String
-        return value
-    }
 }

@@ -18,6 +18,8 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
         self.restApiManager =  RestApiManager(tableView: self.tableView)
         self.restApiManager?.initialize()
+
+        
     }
 
     // MARK: - Table view data source
