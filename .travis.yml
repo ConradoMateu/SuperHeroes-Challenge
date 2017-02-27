@@ -1,7 +1,5 @@
 language: objective-c
-osx_image: xcode8
-ignore:
-  - Challenge/ApiKey.plist
+osx_image: xcode8.2
 
 before_install:
   - pod repo update --silent
